@@ -1,0 +1,13 @@
+title: Test Page
+
+fields:
+  testfile:
+    display: Test File
+    type: fileclerk
+  content:
+    display: Page Content
+    required: false
+    default:
+    type: redactor
+
+

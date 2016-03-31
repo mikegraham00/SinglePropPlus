@@ -1,0 +1,225 @@
+title: Details
+
+fields:
+  property:
+    display: Property Info
+    type: section
+  street_address:
+    display: Street Address
+    type: text
+  city_st:
+    display: City, ST
+    type: text
+  zip_code:
+    display: ZIP Code
+    type: text
+  price:
+    display: Price
+    type: text
+  property_tagline:
+    display: Property Tagline
+    type: text
+    instructions: "EX: Luxury Home for Sale on Lake Austin"
+  stats:
+    display: Stats
+    type: grid
+    fields:
+      stat:
+        display: Stat
+        type: text
+        instructions: "Usually a number. EX: 5 (for 5 bedrooms)"
+        width: 20%
+      label:
+        display: Label
+        type: text
+        instructions: "The label for this stat. EX: Bedrooms (for 5 bedrooms)"
+  schools:
+    display: Schools
+    type: grid
+    starting_rows: 3
+    fields:
+      school_name:
+        display: School Name
+        type: text
+        
+  logos_section:
+    display: Logos & Images
+    type: section
+  main_logo:
+    display: Main Logo
+    type: file
+    max_files: 1
+    allowed: [png, svg]
+    destination: assets/logos
+    show_thumbnail: true
+
+  horizontal_logo:
+    display: Horizontal Logo (light)
+    type: file
+    max_files: 1
+    allowed: ['png', 'svg']
+    destination: assets/logos
+    show_thumbnail: true
+  horizontal_logo_dark:
+    display: Horizontal Logo (dark)
+    type: file
+    max_files: 1
+    allowed: ['png', 'svg']
+    destination: assets/logos
+    show_thumbnail: true
+  separator_image:
+    display: Separator Image
+    type: file
+    max_files: 1
+    allowed: [jpg, jpeg, png]
+    destination: assets/img
+    instructions: "This image appears above the stats section. Minimum 1200px wide."
+
+  video_section:
+    display: Videos
+    type: section
+  main_video:
+    display: Main Video
+    type: grid
+    instructions: This is the main video for the site. Upload videos to Amazon S3 and paste full URL into corresponding field below.
+    max_rows: 1
+    fields:
+      poster_image:
+        display: Poster Image
+        type: file
+        allowed: [jpg, jpeg, png]
+        destination: assets/video
+        max_files: 1
+        width: 20%
+      mp4_file:
+        display: MP4 File URL
+        type: text
+        
+      webm_file:
+        display: WebM File
+        type: text
+      
+  footer_video:
+    display: Footer Video
+    type: grid
+    instructions: This is the footer video for the site.
+    max_rows: 1
+    fields:
+      poster_image:
+        display: Poster Image
+        type: file
+        allowed: [jpg, jpeg, png]
+        destination: assets/video
+        max_files: 1
+        width: 20%
+      mp4_file:
+        display: MP4 File URL
+        type: text
+      webm_file:
+        display: WebM File URL
+        type: text
+  footer_tagline:
+    display: Footer Tagline
+    type: text
+  downloads:
+    display: Downloads
+    type: section
+  download_files:
+    display: Download Files
+    type: grid
+    fields:
+      download_file:
+        display: File
+        type: file
+        max_files: 1
+        destination: assets/downloads
+        allowed: [pdf, jpeg, jpg, png]
+      file_label:
+        display: File Label
+        type: text
+  
+  floorplans:
+    display: Floorplans
+    type: section
+  floorplan_files:
+    display: Floorplans
+    type: grid
+    fields:
+      floorplan:
+        display: Floorplan File
+        type: file
+        max_files: 1
+        destination: assets/downloads
+        allowed: [jpeg, jpg, png]
+      label:
+        display: Floorplan Label
+        type: text
+
+  prop_descriptions:
+    display: Property Descriptions
+    type: section
+  description:
+    display: Description
+    type: replicator
+    sets:
+
+      video_and_text_set:
+        display: Video and Text
+        fields:
+          video_position:
+            display: Video Position
+            type: radio
+            options:
+              left: Left
+              right: Right
+          mp4_file:
+            display: MP4 File URL
+            type: text
+            
+          webm_file:
+            display: WebM File URL
+            type: text
+            
+          poster_image:
+            display: Poster Image
+            type: file
+            allowed: [jpg, jpeg, png]
+            destination: assets/video
+            max_files: 1
+          section_title:
+            display: Section Title
+            type: text
+          section_content:
+            display: Section Content
+            type: redactor
+
+      image_and_text_set:
+        display: Image and Text
+        fields:
+          image_position:
+            display: Image Position
+            type: radio
+            options:
+              left: Left
+              right: Right
+          image:
+            display: Image
+            type: file
+            allowed: [jpg, jpeg, png]
+            destination: assets/img
+            max_files: 1
+          section_title:
+            display: Section Title
+            type: text
+          section_content:
+            display: Section Content
+            type: redactor
+  gallery_section:
+    type: section
+    display: Gallery
+  gallery:
+    display: Photo Gallery
+    type: file
+    destination: assets/gallery
+    allowed: [jpeg, jpg, png]
+hide: true

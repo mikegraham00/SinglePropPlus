@@ -1,0 +1,65 @@
+###########################################################################################
+#
+#  CONTACT FORMSET
+#
+#  
+#
+###########################################################################################
+
+# Location (from root) to save form submissions
+submission_save_path: _forms/
+
+# Fields allowed to be submitted in the form, automatically
+# purging anything and everything else
+allowed:
+  - name
+  - email
+  - message
+  - address
+
+# You are not required to require fields, but once you do, any missing
+# from the POST will squash this submission and send a list of
+# missing fields to your {{ raven:errors }} tagpair
+required:
+  - name
+  - email
+
+submission_save_extension: yaml
+
+# Apply validation rules to specific fields. Refer to documentation
+# for a full list of available rules and their format
+validate:
+  email: email
+
+honeypot: website
+
+# Error messages can be mapped to your fields and passed to the
+# template upon failure. They will be available here:
+#
+# {{ raven:error }}
+#     {{ invalid }}
+#         {{ field }} : {{ message }}
+#     {{ /invalid }}
+# {{ /raven:error }}
+#
+messages:
+  email: "This doesn't look like a valid email address."
+
+# Configure notification email
+email:
+  to: eric@moreland.com
+  bcc: mike@backbeatweb.com
+  from: "{{ email }}"
+  subject: "Property Inquiry on {{ address }}"
+  automagic: true
+  # html_template: html_email
+  # text_template: text_email
+
+datestamp_format: "m/d/Y"
+
+control_panel:
+  fields:
+    - name
+    - email
+    - message
+    - datestamp

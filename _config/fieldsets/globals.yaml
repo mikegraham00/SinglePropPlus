@@ -1,0 +1,65 @@
+hide: true
+
+fields:
+
+  slug:
+    hide: yes
+  content:
+    type: hidden
+
+  # add your fields here...
+  agent_section:
+    display: Agent
+    type: section
+  agent_name:
+    display: Name
+    type: text
+    default: "Eric Moreland"
+  agent_title:
+    display: Title
+    type: text
+    default: "Broker Associate"
+  elite_25:
+    display: Elite 25
+    type: checkbox
+  agent_photo:
+    display: Photo
+    type: file
+    allowed: [jpg, png]
+    destination: assets/img
+  agent_phone:
+    display: Mobile Phone Number
+    type: text
+    default: (512) 294-8442
+  agent_office_phone:
+    display: Office Phone Number
+    type: text
+    default: "(512) 480-0848 x192"
+  agent_email:
+    display: Email
+    type: text
+    default: "eric@moreland.com"
+  agent_website:
+    display: Website
+    type: text
+
+  agency_section:
+    display: Agency
+    type: section
+  agency:
+    display: Agency Name
+    type: text
+    default: "Moreland Properties"
+  agency_address:
+    display: Agency Address
+    type: text
+    default: "3825 Lake Austin Blvd. Suite 501"
+  agency_city:
+    display: City, ST ZIP
+    type: text
+    default: "Austin, TX 78703"
+  agency_logos:
+    display: Logos
+    type: file
+    allowed: [jpg, png, svg, gif]
+    destination: assets/img

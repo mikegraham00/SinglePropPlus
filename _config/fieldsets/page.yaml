@@ -1,0 +1,13 @@
+title: Standard Page
+
+fields:
+  
+  content:
+    display: Page Content
+    required: false
+    default:
+    type: redactor
+
+include:
+  - details
+

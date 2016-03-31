@@ -1,0 +1,359 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{{ street_address }} | {{ property_tagline }}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <link rel="stylesheet" href="{{ theme_path }}css/normalize.min.css">
+        <link rel="stylesheet" href="{{ theme_path }}css/main.css">
+        <link rel="stylesheet" href="{{ theme_path }}js/vendor/unslider/css/unslider-dots.css">
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+        <script src="{{ theme_path }}js/vendor/modernizr-2.8.3.min.js"></script>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!--<div class="loading-wrap">
+            <div class="loading-anim"></div>
+        </div>-->
+        <div class="header">
+            <header>
+                <nav class="main">
+                    <h3 class="nav-toggle"><i class="fa fa-bars"></i></h3>
+                    <div class="logo">
+
+                        <a href="/" style="background-image: url('{{ horizontal_logo }}');" >
+                        	{{ street_address }} {{ city_st }}</a>
+                    </div>
+                    <div class="nav-items">
+                        <a href="#details">Details</a>
+                        <a href="#gallery">Gallery</a>
+                        <!--<a href="#video">Video</a>-->
+                        <a href="#floorplans">Floorplan</a>
+                        <a href="#location">Location</a>
+                        <a href="#" class="contact-open">Contact</a>
+                    </div>
+                </nav>
+                <div class="mobile-logo">
+                    
+                </div>
+            </header>
+
+            <div class="hero-wrap" style="background-image: url('{{ main_video}}{{ path src='{poster_image }' }}{{ /main_video }}');">
+            	{{ main_video }}
+                <video autoplay="true" loop="true" class="bgvid" webkit-playsinline="" id="mainVideo">
+                    <source src="{{ webm_file }}" type="video/webm">
+                    <source src="{{ mp4_file }}" type="video/mp4">
+                </video>
+                {{ /main_video }}
+                <div class="hero-content">
+                    <h2 class="logo"><span class="logo-wrap">{{ main_logo|img }}</span></h2>
+                    
+                    <a href="#details" class="button light">View Details</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container">
+
+            <div class="details" id="details">
+
+                <div class="section light center-text">
+                    <h4>Offered at <strong>{{ price }}</strong></h4>
+                    <h5>{{ street_address }}<br />{{ city_st }} {{ zip_code }}</h5>
+                    
+                </div>
+
+                <div class="section image-full parallax-window" style="background-image: url('{{ path src="{ separator_image }" }}');">
+                    
+                </div>
+
+                <div class="section light stats">
+                	{{ stats }}
+                    <div class="stat">
+                        <strong>{{ stat }}</strong>
+                        <p>{{ label }}</p>
+                    </div>
+                    {{ /stats }}
+                    
+                </div>
+               
+            </div>
+
+            <div class="section additional-details">
+                <span class="details-toggle">More Info<i class="fa fa-chevron-down"></i></span>
+                <div class="inner">
+                    <div class="half schools">
+
+                        <h3>Schools</h3>
+                        {{ schools }}
+                        <p>{{ school_name }}</p>
+                        {{ /schools }}
+                    </div>
+
+                    <div class="half downloads">
+
+                        <h3>Downloads</h3>
+                        {{ download_files }}
+                        <p><a href="{{ path src='{ download_file }' }}" target="_blank"><i class="fa fa-file"></i>{{ file_label }}</a></p>
+                        {{ /download_files }}
+                        
+                    </div>
+
+                    <div class="full">
+                        
+                    </div>
+                </div>
+
+            </div>
+
+            {{ description }}
+
+            	{{ if type == "video_and_text_set" }}
+	            <div class="section media-and-text video">
+	                <div class="media {{ video_position }}" style="background-image: url('{{poster_image}}');">
+	                    <video autoplay="true" loop="true" webkit-playsinline="" class="bg">
+	                        <source src="{{ webm_file }}" type="video/webm">
+	                        <source src="{{ mp4_file }}" type="video/mp4">
+	                    </video>
+	                </div>
+	                <div class="text ">
+	                    <h3>{{ section_title }}</h3>
+	                    {{ section_content }}
+	                </div>
+	            </div>
+	            {{ elseif type == "image_and_text_set" }}
+
+	            <div class="section media-and-text">
+	                <div class="media {{ image_position }}" style="background-image: url('{{ image }}');">
+	                    
+	                </div>
+	                <div class="text {{ if image_position == "left" }}right{{ else }}left{{ /if }}">
+	                    <h3>{{ section_title }}</h3>
+	                    {{ section_content }}
+	                </div>
+	            </div>
+
+	            {{ /if }}
+            {{ /description }}
+
+            <div class="section gallery-section" id="gallery">
+                <div class="gallery-wrap">
+                    {{ gallery }}
+                        {{ value|img }}
+                   	{{ /gallery }}
+                    
+                </div>
+            </div>
+
+            <div class="section floorplans" id="floorplans">
+                <ul class="accordion-tabs-minimal">
+                  {{ floorplan_files }}
+	              <li class="tab-header-and-content">
+	                <a class="tab-link">{{ label }}</a>
+	                <div class="tab-content">
+	                {{ floorplan|img }}
+	                </div>
+	              </li>
+	              {{ /floorplan_files }}
+                </ul>
+            </div>
+
+            <!--
+            <div class="section full-video" id="video">
+                <iframe src="//player.vimeo.com/video/146728761?byline=0&portrait=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            </div>
+            -->
+            {{ var:full_address }}{{ street_address }} {{ city_st }} {{ zip_code }}{{ /var:full_address }}
+            
+            <div class="section location" id="location">
+                <iframe 
+                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCBsUAQi6v1Bf3vEzzmfO82s4FhkQPdt8o&q={{ var:extract }}{{ full_address|urlencode }}{{ /var:extract }}" 
+                    width="100%" 
+                    height="400" 
+                    frameborder="0" 
+                    style="border:0" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            {{ footer_video }}
+            <div class="section media full cta" style="background-image: url('{{ poster_image }}');">
+                <video autoplay="" loop="" webkit-playsinline="" class="bgvid">
+                    <source src="{{ webm_file }}" type="video/webm">
+                    <source src="{{ mp4_file }}" type="video/mp4">
+                </video>
+            {{ /footer_video }}
+                {{ if footer_tagline }}
+                <h3>{{ footer_tagline }}</h3>
+                {{ /if }}
+            </div>
+        
+        </div>
+        <footer>
+            
+            <div class="bottom-bar">
+                <img src="{{ theme_path }}/img/moreland-logo.svg" class="footer-logo">
+                <img src="{{ theme_path }}/img/christies-logo.svg" class="footer-logo">
+               
+               <p><a href="#" class="button contact-open">Contact Us</a></p>
+               <h6>&copy;{{ current_date format="Y" }} {{ globals:agent_name }}</h6>
+               <h6>Information contained herein believed accurate, but not guaranteed.</h6>
+            </div>
+        </footer>
+
+        <div class="contact-wrap" id="contact">
+                <span class="contact-close"><i class="fa fa-times"></i></span>
+               <div class="contact-inner">
+                <div class="agent">
+                    {{ get_content from="/globals" show_drafts="yes"}}
+                    <div class="photo">
+                    	{{ if agent_photo }}
+                    	   {{ agent_photo|img }}
+                    	{{ else }}
+                            <img src="{{ theme_path }}img/ericmoreland.jpg">
+                        {{ /if }}
+                    </div>
+                    <div class="info">
+                        <div class="agent-title">
+                            <h5>{{ agent_name }}</h5>
+                            <h6>{{ agent_title }}{{ if elite }}, <img src="{{ theme_path }}img/elite25.png">{{ /if }}</h6>
+                            <hr />
+                        </div>
+                        <div class="agent-contact">
+                            <p>{{ agency_address }} <br />
+                                {{ agency_city }}</p>    
+                            <p>{{ agent_office_phone }}</p>
+                            <p>{{ agent_phone }}</p>
+                            <p>{{ agent_email }}</p>
+                            {{ if agent_website }}
+                            <p><a href="http://{{ agent_website }}" target="_blank">{{ agent_website }}</a></p>
+                            {{ /if }}
+                            <hr />
+                            {{ if agency_logos }}
+	                            {{ agency_logos }}
+	                            <p><img src="{{ value }}"></p>
+	                            {{ /agency_logos }}
+	                        {{ else }}
+	                        	<p><img src="{{ theme_path }}img/moreland-logo.svg"></p>
+	                        	<p><img src="{{ theme_path }}img/christies-logo.svg"></p>
+	                        {{ /if }}
+                        </div>
+                    </div>
+                    {{ /get_content }}
+                </div>
+                
+                {{ raven:errors }}
+                <div class="error-block">
+                	<h4>There appear to be some issues with your submission:</h4>
+                	{{ if missing }}
+                		{{ missing }}
+                			<p><strong>{{ field|upper }} is required.</strong></p>
+                		{{ /missing }}
+                	{{ /if }}
+                	{{ if invalid }}
+                		{{ invalid }}
+                			<p><strong>{{ field|upper }}: {{ message }}</strong></p>
+                		{{ /invalid }}
+                	{{ /if }}
+                </div>
+                {{ /raven:errors }}
+                
+                {{if {raven:success} }}
+                	<h3>Thanks for Contacting Us</h3>
+                	<p>We'll be in touch very shortly.</p>
+                {{ else }}
+	                <h3>Contact Us</h3>
+	                
+
+	                {{ raven:form formset="contact" return="/#contact" error_return="/#contact"}}
+	                    <input type="text" name="name" placeholder="Name">
+	                    <input type="email" name="email" placeholder="Email">
+	                    <input type="text" name="website" placeholder="Website">
+	                    <input type="hidden" name="address" value="{{ street_address }}">
+	                    <textarea name="message" placeholder="Message"></textarea>
+	                    <input type="submit" value="Submit">
+	                {{ /raven:form }}
+	            {{ /if }}
+               </div>
+        </div>
+
+        
+
+        <!--<script src="js/vendor/parallax/parallax.min.js"></script>-->
+
+        <script>
+        //show loading animation until main video loads
+        $(function(){
+            var vid = $("#mainVideo");
+            var loader = $('.loading-wrap');
+            vid.on("canplay", function() {
+                //console.log('can play');
+              loader.addClass('hideme');
+              //vid[0].play();
+            });
+        });
+        //hide other videos until they are ready to play
+        $(function(){
+            var vids = $(".bg");
+            
+            $.each(vids, function(){
+                $(this).on("canplay", function() {
+                    $(this).addClass('showme');
+                    $(this).parent('.media').addClass('nobg');
+                    //$(this).play();
+                })
+            })
+        });
+        //contact form stuff
+        $(function(){
+        	if ($(location).attr('hash') === "#contact") {
+        		$('.contact-wrap').addClass('open');
+        	}
+        });
+        </script>
+
+        <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.min.js"></script>
+        <script src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+        
+        
+       <script>
+       //add scroll interactions
+        $(window).on('scroll', function(){
+            var scroll = $(window).scrollTop();
+
+            if( scroll === 0 ) {
+                $('body').removeClass('scrolled');
+                $('.logo a').css("background-image", "url('{{ horizontal_logo }}')");
+            } else {
+                $('body').addClass('scrolled');
+                $('.logo a').css("background-image", "url('{{ horizontal_logo_dark }}')");
+            }
+            
+        });
+        </script>
+        <script src="{{ theme_path }}js/main.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+        </script>
+    </body>
+</html>
