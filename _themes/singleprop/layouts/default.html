@@ -34,7 +34,7 @@
                     <div class="logo">
 
                         <a href="/" style="background-image: url('{{ horizontal_logo }}');" >
-                        	{{ street_address }} {{ city_st }}</a>
+                            {{ street_address }} {{ city_st }}</a>
                     </div>
                     <div class="nav-items">
                         <a href="#details">Details</a>
@@ -42,7 +42,7 @@
                         <!--<a href="#video">Video</a>-->
                         <a href="#floorplans">Floorplan</a>
                         <a href="#location">Location</a>
-                        <a href="#" class="contact-open">Contact</a>
+                        <a href="#" class="contact-open">Inquire</a>
                     </div>
                 </nav>
                 <div class="mobile-logo">
@@ -50,11 +50,12 @@
                 </div>
             </header>
 
-            <div class="hero-wrap" style="background-image: url('{{ main_video}}{{ path src='{poster_image }' }}{{ /main_video }}');">
-            	{{ main_video }}
-                <video autoplay="true" loop="true" class="bgvid" webkit-playsinline="" id="mainVideo">
-                    <source src="{{ webm_file }}" type="video/webm">
-                    <source src="{{ mp4_file }}" type="video/mp4">
+            <div class="hero-wrap" style="background-image: url('{{ main_video}}{{ transform src="{poster_image}" width="800" }}{{ /main_video }}');">
+
+                {{ main_video }}
+                <video autoplay loop poster="{{ transform src="{poster_image}" width="800" }}" class="bgvid" webkit-playsinline="" id="mainVideo">
+                    
+                    <source id="mainVideoSource" src="" type="video/mp4">
                 </video>
                 {{ /main_video }}
                 <div class="hero-content">
@@ -71,17 +72,17 @@
             <div class="details" id="details">
 
                 <div class="section light center-text">
-                    <h4>Offered at <strong>{{ price }}</strong></h4>
+                    <h4><strong>{{ price }}</strong></h4>
                     <h5>{{ street_address }}<br />{{ city_st }} {{ zip_code }}</h5>
                     
                 </div>
 
-                <div class="section image-full parallax-window" style="background-image: url('{{ path src="{ separator_image }" }}');">
+                <div class="section image-full parallax-window" style="background-image: url('{{ transform src="{ separator_image }" width="1300" }}');">
                     
                 </div>
 
                 <div class="section light stats">
-                	{{ stats }}
+                    {{ stats }}
                     <div class="stat">
                         <strong>{{ stat }}</strong>
                         <p>{{ label }}</p>
@@ -120,40 +121,33 @@
             </div>
 
             {{ description }}
-
-            	{{ if type == "video_and_text_set" }}
-	            <div class="section media-and-text video">
-	                <div class="media {{ video_position }}" style="background-image: url('{{poster_image}}');">
-	                    <video autoplay="true" loop="true" webkit-playsinline="" class="bg">
-	                        <source src="{{ webm_file }}" type="video/webm">
-	                        <source src="{{ mp4_file }}" type="video/mp4">
-	                    </video>
-	                </div>
-	                <div class="text ">
-	                    <h3>{{ section_title }}</h3>
-	                    {{ section_content }}
-	                </div>
-	            </div>
-	            {{ elseif type == "image_and_text_set" }}
-
-	            <div class="section media-and-text">
-	                <div class="media {{ image_position }}" style="background-image: url('{{ image }}');">
-	                    
-	                </div>
-	                <div class="text {{ if image_position == "left" }}right{{ else }}left{{ /if }}">
-	                    <h3>{{ section_title }}</h3>
-	                    {{ section_content }}
-	                </div>
-	            </div>
-
-	            {{ /if }}
+            {{ if type == "video_and_text_set" }}
+                <div class="section media-and-text video">
+                    <div class="media {{video_position}}" style="background-image: url('{{ transform src="{poster_image}" width="800" }}');">
+                        <video autoplay="true" loop="true" webkit-playsinline="" class="bg">
+                            <source src="{{ webm_file }}" type="video/webm">
+                            <source src="{{ mp4_file }}" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="text ">
+                        <h3>{{ section_title }}</h3>
+                        {{ section_content }}
+                    </div>
+                </div>
+            
+                
+            {{ /if }}
             {{ /description }}
 
             <div class="section gallery-section" id="gallery">
                 <div class="gallery-wrap">
                     {{ gallery }}
-                        {{ value|img }}
-                   	{{ /gallery }}
+                        <img
+                            srcset="{{ transform src='{ value }' width='400' }} 500w,
+                                    {{ transform src='{ value }' width='800' }} 800w"
+                            src="{{ value }}"
+                        />
+                    {{ /gallery }}
                     
                 </div>
             </div>
@@ -161,13 +155,13 @@
             <div class="section floorplans" id="floorplans">
                 <ul class="accordion-tabs-minimal">
                   {{ floorplan_files }}
-	              <li class="tab-header-and-content">
-	                <a class="tab-link">{{ label }}</a>
-	                <div class="tab-content">
-	                {{ floorplan|img }}
-	                </div>
-	              </li>
-	              {{ /floorplan_files }}
+                  <li class="tab-header-and-content">
+                    <a class="tab-link">{{ label }}</a>
+                    <div class="tab-content">
+                    {{ floorplan|img }}
+                    </div>
+                  </li>
+                  {{ /floorplan_files }}
                 </ul>
             </div>
 
@@ -179,7 +173,7 @@
             {{ var:full_address }}{{ street_address }} {{ city_st }} {{ zip_code }}{{ /var:full_address }}
             
             <div class="section location" id="location">
-                <iframe 
+                <iframe>
                     src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCBsUAQi6v1Bf3vEzzmfO82s4FhkQPdt8o&q={{ var:extract }}{{ full_address|urlencode }}{{ /var:extract }}" 
                     width="100%" 
                     height="400" 
@@ -187,13 +181,14 @@
                     style="border:0" 
                     allowfullscreen>
                 </iframe>
+                
             </div>
 
             {{ footer_video }}
-            <div class="section media full cta" style="background-image: url('{{ poster_image }}');">
-                <video autoplay="" loop="" webkit-playsinline="" class="bgvid">
-                    <source src="{{ webm_file }}" type="video/webm">
-                    <source src="{{ mp4_file }}" type="video/mp4">
+            <div class="section media full cta" style="background-image: url('{{ transform src="{poster_image}" width="1200" }}');">
+                <video autoplay="" loop="" webkit-playsinline="" class="bgvid" id="footerVid">
+                    <source id="footerVidWebm" src="" type="video/webm">
+                    <source id="footerVidMp4" src="" type="video/mp4">
                 </video>
             {{ /footer_video }}
                 {{ if footer_tagline }}
@@ -220,9 +215,9 @@
                 <div class="agent">
                     {{ get_content from="/globals" show_drafts="yes"}}
                     <div class="photo">
-                    	{{ if agent_photo }}
-                    	   {{ agent_photo|img }}
-                    	{{ else }}
+                        {{ if agent_photo }}
+                           {{ agent_photo|img }}
+                        {{ else }}
                             <img src="{{ theme_path }}img/ericmoreland.jpg">
                         {{ /if }}
                     </div>
@@ -243,13 +238,13 @@
                             {{ /if }}
                             <hr />
                             {{ if agency_logos }}
-	                            {{ agency_logos }}
-	                            <p><img src="{{ value }}"></p>
-	                            {{ /agency_logos }}
-	                        {{ else }}
-	                        	<p><img src="{{ theme_path }}img/moreland-logo.svg"></p>
-	                        	<p><img src="{{ theme_path }}img/christies-logo.svg"></p>
-	                        {{ /if }}
+                                {{ agency_logos }}
+                                <p><img src="{{ value }}"></p>
+                                {{ /agency_logos }}
+                            {{ else }}
+                                <p><img src="{{ theme_path }}img/moreland-logo.svg"></p>
+                                <p><img src="{{ theme_path }}img/christies-logo.svg"></p>
+                            {{ /if }}
                         </div>
                     </div>
                     {{ /get_content }}
@@ -257,36 +252,36 @@
                 
                 {{ raven:errors }}
                 <div class="error-block">
-                	<h4>There appear to be some issues with your submission:</h4>
-                	{{ if missing }}
-                		{{ missing }}
-                			<p><strong>{{ field|upper }} is required.</strong></p>
-                		{{ /missing }}
-                	{{ /if }}
-                	{{ if invalid }}
-                		{{ invalid }}
-                			<p><strong>{{ field|upper }}: {{ message }}</strong></p>
-                		{{ /invalid }}
-                	{{ /if }}
+                    <h4>There appear to be some issues with your submission:</h4>
+                    {{ if missing }}
+                        {{ missing }}
+                            <p><strong>{{ field|upper }} is required.</strong></p>
+                        {{ /missing }}
+                    {{ /if }}
+                    {{ if invalid }}
+                        {{ invalid }}
+                            <p><strong>{{ field|upper }}: {{ message }}</strong></p>
+                        {{ /invalid }}
+                    {{ /if }}
                 </div>
                 {{ /raven:errors }}
                 
                 {{if {raven:success} }}
-                	<h3>Thanks for Contacting Us</h3>
-                	<p>We'll be in touch very shortly.</p>
+                    <h3>Thanks for Contacting Us</h3>
+                    <p>We'll be in touch very shortly.</p>
                 {{ else }}
-	                <h3>Contact Us</h3>
-	                
+                    <h3>Contact Us</h3>
+                    
 
-	                {{ raven:form formset="contact" return="/#contact" error_return="/#contact"}}
-	                    <input type="text" name="name" placeholder="Name">
-	                    <input type="email" name="email" placeholder="Email">
-	                    <input type="text" name="website" placeholder="Website">
-	                    <input type="hidden" name="address" value="{{ street_address }}">
-	                    <textarea name="message" placeholder="Message"></textarea>
-	                    <input type="submit" value="Submit">
-	                {{ /raven:form }}
-	            {{ /if }}
+                    {{ raven:form formset="contact" return="/#contact" error_return="/#contact"}}
+                        <input type="text" name="name" placeholder="Name">
+                        <input type="email" name="email" placeholder="Email">
+                        <input type="text" name="website" placeholder="Website">
+                        <input type="hidden" name="address" value="{{ street_address }}">
+                        <textarea name="message" placeholder="Message"></textarea>
+                        <input type="submit" value="Submit">
+                    {{ /raven:form }}
+                {{ /if }}
                </div>
         </div>
 
@@ -296,13 +291,27 @@
 
         <script>
         //show loading animation until main video loads
+        
         $(function(){
-            var vid = $("#mainVideo");
+            var mainVid = $("#mainVideo");
+            var footVid = $("#footerVid");
+            var windowSize = window.matchMedia('(min-width: 769px)'); //screen is larger than 769px. not the best test to determine whether to load video, but the best we've got
             var loader = $('.loading-wrap');
-            vid.on("canplay", function() {
-                //console.log('can play');
+            if (windowSize.matches) { //screen size is larger than windowSize. load main and footer video.
+                var mainVidSrc = $("#mainVideoSource");
+                var footerWebm = $("#footerVidWebm");
+                var footerMp4 = $("#footerVidMp4");
+                mainVidSrc.attr('src', '{{ main_video }}{{ mp4_file }}{{ /main_video }}');
+                mainVid[0].load();
+                footerWebm.attr('src', '{{ footer_video }}{{ webm_file }}{{ /footer_video }}');
+                footerMp4.attr('src', '{{ footer_video }}{{ mp4_file }}{{ /footer_video }}');
+                footVid[0].load();
+                
+            }
+            mainVid.on("canplay", function() {
+                
               loader.addClass('hideme');
-              //vid[0].play();
+             
             });
         });
         //hide other videos until they are ready to play
@@ -319,9 +328,9 @@
         });
         //contact form stuff
         $(function(){
-        	if ($(location).attr('hash') === "#contact") {
-        		$('.contact-wrap').addClass('open');
-        	}
+            if ($(location).attr('hash') === "#contact") {
+                $('.contact-wrap').addClass('open');
+            }
         });
         </script>
 
@@ -347,13 +356,15 @@
         <script src="{{ theme_path }}js/main.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        {{ get_content from="/globals" show_drafts="yes"}}
         <script>
             (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
             function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
             e=o.createElement(i);r=o.getElementsByTagName(i)[0];
             e.src='//www.google-analytics.com/analytics.js';
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+            ga('create','{{ analytics_code }}','auto');ga('send','pageview');
         </script>
+        {{ /get_content }}
     </body>
 </html>

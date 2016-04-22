@@ -1,9 +1,20 @@
 
 
+//add scroll interactions
+$(window).on('scroll', function(){
+	var scroll = $(window).scrollTop();
 
+	if( scroll === 0 ) {
+		$('body').removeClass('scrolled');
+	} else {
+		$('body').addClass('scrolled');
+	}
+	
+});
 
 
 $(document).ready(function() {
+
 
 	//mobile nav
 	var toggler = $('.nav-toggle');
@@ -86,12 +97,12 @@ $(function() {
 		adaptiveHeight: true,
 	    centerMode: true,
 	    variableWidth: true,
-        speed: 1000,
+        speed: 500,
         easing: 'swing',
         prevArrow: '<div class="slider-nav slick-prev"><i class="fa fa-chevron-left"></i></div>',
         nextArrow: '<div class="slider-nav slick-next"><i class="fa fa-chevron-right"></i></div>',
-        dots: true,
-        lazyLoad: 'progressive'
+        dots: false,
+        lazyLoad: 'ondemand'
 	});
 	
 });

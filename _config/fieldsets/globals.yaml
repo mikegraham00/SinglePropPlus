@@ -8,6 +8,12 @@ fields:
     type: hidden
 
   # add your fields here...
+  analytics_section:
+    display: Analytics
+    type: section
+  analytics_code:
+    display: Google Analytics Code
+    type: text
   agent_section:
     display: Agent
     type: section
