@@ -1124,7 +1124,9 @@ footer {
     -ms-flex-direction: row; }
     .section.media-and-text .media {
       width: 66.67%;
-      min-height: 640px; }
+      min-height: 640px;
+      max-height: none;
+      height: auto; }
     .section.media-and-text .text {
       width: 33.33%; }
   .section.media {

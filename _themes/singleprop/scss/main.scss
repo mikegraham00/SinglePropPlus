@@ -731,6 +731,8 @@ footer {
             .media {
                 width: 66.67%;
                 min-height: 640px;
+                max-height: none;
+                height: auto;
                 video.bg {
                     //display: block;
                 }
