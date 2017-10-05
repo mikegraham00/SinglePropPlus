@@ -1,29 +1,4 @@
+<div class="section description">
+    <h2>{{ description_heading }}</h2>
 {{ description }}
-    {{ if type == "video_and_text_set" }}
-    <div class="section media-and-text video">
-        <div class="media {{ video_position }}" style="background-image: url('{{ transform src="{poster_image}" width="800" }}');">
-            {{ if mp4_file }}
-            <video autoplay="true" loop="true" webkit-playsinline="" class="bg">
-                <source src="{{ webm_file }}" type="video/webm">
-                <source src="{{ mp4_file }}" type="video/mp4">
-            </video>
-           {{ /if }}
-        </div>
-        <div class="text ">
-            <h3>{{ section_title }}</h3>
-            {{ section_content }}
-        </div>
-    </div>
-    {{ else }}
-    <div class="section media-and-text image">
-        <div class="media {{ image_position }}" style="background-image: url('{{ transform src="{image}" width="800" }}');">
-            
-        </div>
-        <div class="text ">
-            <h3>{{ section_title }}</h3>
-            {{ section_content }}
-        </div>
-    </div>
-    {{ /if }}
-
-{{ /description }}
+</div>

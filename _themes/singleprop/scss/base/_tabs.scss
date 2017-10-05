@@ -12,6 +12,7 @@
   $tab-inactive-hover-color: #c0c0c0;
   $tab-mode: $medium-screen;
 
+
   @include clearfix;
   line-height: 1.5;
   padding: 4rem 2rem;
@@ -36,7 +37,7 @@
       font-size: 1rem;
     }
     @include media($tab-mode) {
-      @include inline-block;
+      display: inline-block;
       border-top: 0;
     }
 
@@ -59,6 +60,7 @@
   }
 
   .tab-content {
+    box-sizing:border-box;
     display: none;
     padding: $base-spacing $gutter;
     width: 100%;

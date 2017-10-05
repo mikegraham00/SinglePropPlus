@@ -3,9 +3,15 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>{{ street_address }} | {{ property_tagline }}</title>
+        <title>{{ street_address }} | {{ city_st }}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta property="og:image" content="{{ _site_url }}{{ main_video }}{{ transform src="{poster_image}" width="600" }}{{ /main_video }}" />
+        <meta property="og:url" content="{{ _site_url }}" />
+        <meta property="og:title" content="{{ street_address }} | {{ city_st }}" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image:alt" content="{{ street_address }}" />
+        
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
         <link rel="stylesheet" href="{{ theme_path }}css/normalize.min.css">
@@ -31,18 +37,15 @@
             <header>
                 <nav class="main">
                     <h3 class="nav-toggle"><i class="fa fa-bars"></i></h3>
-                    <div class="logo">
-
-                        <a href="/" style="background-image: url('{{ horizontal_logo }}');" >
-                            {{ street_address }} {{ city_st }}</a>
+                    <div class="logo {{ if !horizontal_logo }}nologo{{ /if }}">
+                        {{ get_content from="/globals" show_drafts="yes"}}<a href="http://moreland.com"><img src="{{ transform src='{agency_logo}' height='66' }}"></a>{{ /get_content }}<span>{{ property_tagline }}</span>
                     </div>
                     <div class="nav-items">
                         <a href="#details">Details</a>
                         <a href="#gallery">Gallery</a>
-                        <!--<a href="#video">Video</a>-->
-                        <a href="#floorplans">Floorplan</a>
+                        {{ if embedded_video }}<a href="#video">Video</a>{{ /if }}
+                        {{ if floorplan_files }}<a href="#floorplans">Floorplan</a>{{ /if }}
                         <a href="#location">Location</a>
-                        <a href="#" class="contact-open">Inquire</a>
                     </div>
                 </nav>
                 <div class="mobile-logo">
@@ -50,18 +53,16 @@
                 </div>
             </header>
 
-            <div class="hero-wrap" style="background-image: url('{{ main_video}}{{ transform src="{poster_image}" width="800" }}{{ /main_video }}');">
+            <div class="hero-wrap" style="background-image: url('{{ main_video}}{{ transform src="{poster_image}" width="1500" }}{{ /main_video }}');">
 
                 {{ main_video }}
-                <video autoplay loop poster="{{ transform src="{poster_image}" width="800" }}" class="bgvid" webkit-playsinline="" id="mainVideo">
+                <video autoplay loop poster="{{ transform src="{poster_image}" width="1500" }}" class="bgvid" webkit-playsinline="" id="mainVideo">
                     
                     <source id="mainVideoSource" src="" type="video/mp4">
                 </video>
                 {{ /main_video }}
                 <div class="hero-content">
-                    <h2 class="logo"><span class="logo-wrap">{{ main_logo|img }}</span></h2>
-                    
-                    <a href="#details" class="button light">View Details</a>
+                    {{ if main_logo }}<h2 class="logo"><span class="logo-wrap">{{ main_logo|img }}</span></h2>{{ /if }}
                 </div>
             </div>
 
@@ -77,9 +78,7 @@
                     
                 </div>
 
-                <div class="section image-full parallax-window" style="background-image: url('{{ transform src="{ separator_image }" width="1300" }}');">
-                    
-                </div>
+                
 
                 <div class="section light stats">
                     {{ stats }}
@@ -96,15 +95,25 @@
             <div class="section additional-details">
                 <span class="details-toggle">More Info<i class="fa fa-chevron-down"></i></span>
                 <div class="inner">
+                    {{ if other_details }}
+                    <div class="half other-details">
+                        <h3>Details</h3>
+                        {{ other_details }}
+                          {{ label }}:  {{ content }}<br />
+                        {{ /other_details }}
+                    </div>
+                    {{ /if }}
+                    {{ if schools }}
                     <div class="half schools">
 
                         <h3>Schools</h3>
                         {{ schools }}
-                        <p>{{ school_name }}</p>
+                        {{ school_name }}<br />
                         {{ /schools }}
                     </div>
-
-                    <div class="half downloads">
+                    {{ /if }}
+                    {{ if download_files }}
+                    <div class="full downloads">
 
                         <h3>Downloads</h3>
                         {{ download_files }}
@@ -112,7 +121,7 @@
                         {{ /download_files }}
                         
                     </div>
-
+                    {{ /if }}
                     <div class="full">
                         
                     </div>
@@ -122,12 +131,24 @@
 
             {{ theme:partial src="descriptions" }}
 
+            {{ if embedded_video }}
+            <div class="section full-video" id="video" style="background-image: url('{{ transform src="{ separator_image }" width="1300" }}');">
+                {{ embedded_video }}
+            </div>
+            {{ /if }}
+
+            {{ if separator_tagline }}
+            <div class="section separator">
+                <h2>{{ separator_tagline }}</h2>
+            </div>
+            {{ /if }}
             <div class="section gallery-section" id="gallery">
                 <div class="gallery-wrap">
                     {{ gallery }}
                         <img
                             srcset="{{ transform src='{ value }' width='400' }} 500w,
-                                    {{ transform src='{ value }' width='800' }} 800w"
+                                    {{ transform src='{ value }' width='800' }} 800w,
+                                    {{ transform src='{ value }' width='1400' }} 1000w"
                             src="{{ value }}"
                         />
                     {{ /gallery }}
@@ -135,6 +156,8 @@
                 </div>
             </div>
 
+            
+            {{ if floorplan_files }}
             <div class="section floorplans" id="floorplans">
                 <ul class="accordion-tabs-minimal">
                   {{ floorplan_files }}
@@ -147,6 +170,7 @@
                   {{ /floorplan_files }}
                 </ul>
             </div>
+            {{ /if }}
 
             
             {{ var:full_address }}{{ street_address }} {{ city_st }} {{ zip_code }}{{ /var:full_address }}
@@ -163,27 +187,17 @@
                 
             </div>
 
-            {{ footer_video }}
-            <div class="section media full cta" style="background-image: url('{{ transform src="{poster_image}" width="1200" }}');">
-                <video autoplay="" loop="" webkit-playsinline="" class="bgvid" id="footerVid">
-                    <source id="footerVidWebm" src="" type="video/webm">
-                    <source id="footerVidMp4" src="" type="video/mp4">
-                </video>
-            {{ /footer_video }}
-                {{ if footer_tagline }}
-                <h3>{{ footer_tagline }}</h3>
-                {{ /if }}
-            </div>
+            
         
         </div>
         <footer>
             
             <div class="bottom-bar">
-                <img src="{{ theme_path }}/img/moreland-logo.svg" class="footer-logo">
-                <img src="{{ theme_path }}/img/christies-logo.svg" class="footer-logo">
+                <a href="http://moreland.com"><img src="{{ theme_path }}/img/NEW-LOGO_225.png" class="footer-logo"></a>
+                <img src="{{ theme_path }}/img/affiliate-logos.png" style="width: 800px; max-width: 90%;">
                
-               <p><a href="#" class="button contact-open">Contact Us</a></p>
-               <h6>&copy;{{ current_date format="Y" }} {{ globals:agent_name }}</h6>
+               <p><a href="#" class="button contact-open">Contact Agent</a></p>
+               <h6>&copy;{{ current_date format="Y" }} Moreland Properties</h6>
                <h6>Information contained herein believed accurate, but not guaranteed.</h6>
             </div>
         </footer>
@@ -191,14 +205,14 @@
         <div class="contact-wrap" id="contact">
                 <span class="contact-close"><i class="fa fa-times"></i></span>
                <div class="contact-inner">
+                {{ get_content from="/globals" show_drafts="yes"}}
+                {{ agents }}
                 <div class="agent">
-                    {{ get_content from="/globals" show_drafts="yes"}}
+                    
                     <div class="photo">
-                        {{ if agent_photo }}
-                           {{ agent_photo|img }}
-                        {{ else }}
-                            <img src="{{ theme_path }}img/ericmoreland.jpg">
-                        {{ /if }}
+                        
+                           <img src="{{ transform src='{agent_photo}' height='300' width='300' action='smart'}}">
+                        
                     </div>
                     <div class="info">
                         <div class="agent-title">
@@ -209,25 +223,22 @@
                         <div class="agent-contact">
                             <p>{{ agency_address }} <br />
                                 {{ agency_city }}</p>    
-                            <p>{{ agent_office_phone }}</p>
                             <p>{{ agent_phone }}</p>
-                            <p>{{ agent_email }}</p>
-                            {{ if agent_website }}
+                            <p><a href="mailto:{{ globals:agent_email }}">{{ agent_email }}</a></p>
+                            {{ if { agent_website } }}
                             <p><a href="http://{{ agent_website }}" target="_blank">{{ agent_website }}</a></p>
                             {{ /if }}
                             <hr />
-                            {{ if agency_logos }}
-                                {{ agency_logos }}
-                                <p><img src="{{ value }}"></p>
-                                {{ /agency_logos }}
-                            {{ else }}
-                                <p><img src="{{ theme_path }}img/moreland-logo.svg"></p>
-                                <p><img src="{{ theme_path }}img/christies-logo.svg"></p>
-                            {{ /if }}
+                            
+                                <p><a href="http://moreland.com"><img src="{{ theme_path }}img/morelandboxlogo2011.jpg" style="width: 100px; margin-right: 1.5rem;"></a>
+                               <img src="{{ theme_path }}img/affiliate-logos-stacked.png" style="height: 100px; width: auto;"></p>
+                           
                         </div>
                     </div>
-                    {{ /get_content }}
+                   
                 </div>
+                {{ /agents }}
+                {{ /get_content }}
                 
                 {{ raven:errors }}
                 <div class="error-block">
@@ -249,7 +260,7 @@
                     <h3>Thanks for Contacting Us</h3>
                     <p>We'll be in touch very shortly.</p>
                 {{ else }}
-                    <h3>Contact Us</h3>
+                    <h3>Contact Agent</h3>
                     
 
                     {{ raven:form formset="contact" return="/#contact" error_return="/#contact"}}
@@ -273,7 +284,7 @@
         
         $(function(){
             var mainVid = $("#mainVideo");
-            var footVid = $("#footerVid");
+            //var footVid = $("#footerVid");
             var windowSize = window.matchMedia('(min-width: 769px)'); //screen is larger than 769px. not the best test to determine whether to load video, but the best we've got
             var loader = $('.loading-wrap');
             if (windowSize.matches) { //screen size is larger than windowSize. load main and footer video.
@@ -284,11 +295,11 @@
                 mainVid[0].load();
                 footerWebm.attr('src', '{{ footer_video }}{{ webm_file }}{{ /footer_video }}');
                 footerMp4.attr('src', '{{ footer_video }}{{ mp4_file }}{{ /footer_video }}');
-                footVid[0].load();
+                //footVid[0].load();
                 
             }
             mainVid.on("canplay", function() {
-                
+              $('.hero-wrap').css('background-image', 'none');
               loader.addClass('hideme');
              
             });
@@ -324,10 +335,10 @@
 
             if( scroll === 0 ) {
                 $('body').removeClass('scrolled');
-                $('.logo a').css("background-image", "url('{{ horizontal_logo }}')");
+                
             } else {
                 $('body').addClass('scrolled');
-                $('.logo a').css("background-image", "url('{{ horizontal_logo_dark }}')");
+                
             }
             
         });

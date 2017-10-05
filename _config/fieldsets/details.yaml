@@ -17,9 +17,13 @@ fields:
     display: Price
     type: text
   property_tagline:
-    display: Property Tagline
+    display: Header Tagline
     type: text
-    instructions: "EX: Luxury Home for Sale on Lake Austin"
+    instructions: "Appears next to the logo in the header."
+  separator_tagline:
+    display: Separator Section Tagline
+    type: text
+    instructions: "Appears above the gallery section"
   stats:
     display: Stats
     type: grid
@@ -41,7 +45,17 @@ fields:
       school_name:
         display: School Name
         type: text
-        
+  other_details:
+    display: Other Details
+    type: grid
+    starting_rows: 1
+    fields:
+      label:
+        display: Label
+        type: text
+      content:
+        display: Content
+        type: text
   logos_section:
     display: Logos & Images
     type: section
@@ -99,25 +113,11 @@ fields:
         display: WebM File
         type: text
       
-  footer_video:
-    display: Footer Video
-    type: grid
-    instructions: This is the footer video for the site.
-    max_rows: 1
-    fields:
-      poster_image:
-        display: Poster Image
-        type: file
-        allowed: [jpg, jpeg, png]
-        destination: assets/video
-        max_files: 1
-        width: 20%
-      mp4_file:
-        display: MP4 File URL
-        type: text
-      webm_file:
-        display: WebM File URL
-        type: text
+  embedded_video:
+    display: Embedded Video
+    type: text
+    instructions: This appears in the video section of the site. Paste in Vimeo or YouTube embed iframe code.
+
   footer_tagline:
     display: Footer Tagline
     type: text
@@ -155,65 +155,21 @@ fields:
         display: Floorplan Label
         type: text
 
-  prop_descriptions:
-    display: Property Descriptions
+  prop_description:
+    display: Property Description
     type: section
+  description_heading:
+    display: Section Heading
+    type: text
   description:
-    display: Description
-    type: replicator
-    sets:
-
-      video_and_text_set:
-        display: Video and Text
-        fields:
-          video_position:
-            display: Video Position
-            type: radio
-            options:
-              left: Left
-              right: Right
-          mp4_file:
-            display: MP4 File URL
-            type: text
-            
-          webm_file:
-            display: WebM File URL
-            type: text
-            
-          poster_image:
-            display: Poster Image
-            type: file
-            allowed: [jpg, jpeg, png]
-            destination: assets/video
-            max_files: 1
-          section_title:
-            display: Section Title
-            type: text
-          section_content:
-            display: Section Content
-            type: redactor
-
-      image_and_text_set:
-        display: Image and Text
-        fields:
-          image_position:
-            display: Image Position
-            type: radio
-            options:
-              left: Left
-              right: Right
-          image:
-            display: Image
-            type: file
-            allowed: [jpg, jpeg, png]
-            destination: assets/img
-            max_files: 1
-          section_title:
-            display: Section Title
-            type: text
-          section_content:
-            display: Section Content
-            type: redactor
+    display: Property Description
+    type: redactor
+  description_images:
+    display: Description Images
+    type: file
+    destination: assets/gallery
+    allowed: [jpeg, jpg, png]
+    max_files: 4
   gallery_section:
     type: section
     display: Gallery

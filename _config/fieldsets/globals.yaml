@@ -15,39 +15,43 @@ fields:
     display: Google Analytics Code
     type: text
   agent_section:
-    display: Agent
+    display: Agents
     type: section
-  agent_name:
-    display: Name
-    type: text
-    default: "Eric Moreland"
-  agent_title:
-    display: Title
-    type: text
-    default: "Broker Associate"
-  elite_25:
-    display: Elite 25
-    type: checkbox
-  agent_photo:
-    display: Photo
-    type: file
-    allowed: [jpg, png]
-    destination: assets/img
-  agent_phone:
-    display: Mobile Phone Number
-    type: text
-    default: (512) 294-8442
-  agent_office_phone:
-    display: Office Phone Number
-    type: text
-    default: "(512) 480-0848 x192"
-  agent_email:
-    display: Email
-    type: text
-    default: "eric@moreland.com"
-  agent_website:
-    display: Website
-    type: text
+  agents:
+    type: grid
+    display: Agents
+    fields:
+      agent_name:
+        display: Name
+        type: text
+        
+      agent_title:
+        display: Title
+        type: text
+        
+      elite_25:
+        display: Elite 25
+        type: checkbox
+      agent_photo:
+        display: Photo
+        type: file
+        allowed: [jpg, png]
+        destination: assets/img
+      agent_phone:
+        display: Mobile Phone Number
+        type: text
+        
+      agent_office_phone:
+        display: Office Phone Number
+        type: text
+        
+      agent_email:
+        display: Email
+        type: text
+        
+      agent_website:
+        display: Website
+        type: text
 
   agency_section:
     display: Agency
@@ -64,8 +68,9 @@ fields:
     display: City, ST ZIP
     type: text
     default: "Austin, TX 78703"
-  agency_logos:
-    display: Logos
+  agency_logo:
+    display: Logo
     type: file
     allowed: [jpg, png, svg, gif]
     destination: assets/img
+    max_files: 1

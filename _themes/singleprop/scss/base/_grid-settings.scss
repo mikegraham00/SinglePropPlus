@@ -1,8 +1,14 @@
-@import "neat-helpers"; // or "../neat/neat-helpers" when not in Rails
+//@import "neat-helpers"; // or "../neat/neat-helpers" when not in Rails
+
+@mixin media($bp) {
+    @media screen and (min-width: $bp) {
+      @content;
+  }
+}
 
 // Neat Overrides
 // $column: 90px;
-// $gutter: 30px;
+$gutter: 30px;
 // $grid-columns: 12;
 // $max-width: 1200px;
 

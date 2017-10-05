@@ -21,13 +21,13 @@ _language: en
 _site_root: /
 
 # Name of your site
-_site_name: 4727 Palisade Dr
+_site_name: 
 
 # Change the folder name for your content directory
 _content_root: _content
 
 # Used for permalinks
-_site_url: http://palisadewaterfront.dev
+_site_url: 
 
 # Folder name of your desired theme
 _theme: singleprop
